@@ -35,11 +35,15 @@ UIManager.genericDirectEventTypes = {
 let handlerTag = 1;
 const handlerIDToTag = {};
 
+function isObject(obj) {
+  return obj === Object(obj);
+}
+
 function isConfigParam(param, name) {
   return (
     param !== undefined &&
     typeof param !== 'function' &&
-    (typeof param !== 'object' || !('__isNative' in param)) &&
+    (!isObject(param) || !('__isNative' in param)) &&
     name !== 'onHandlerStateChange' &&
     name !== 'onGestureEvent'
   );
